@@ -5,8 +5,9 @@ const ProductController = require('../controllers/ProductController');
 const ProductService = require('../service/ProductService');
 const productInstance = new ProductController(new ProductService);
 
-router.get('/',(req, res, next) => {
-  res.render('product', { title: 'Express' });
+
+router.post('/products',(req, res, next) => {
+  productInstance.addNewProduct(req, res);
 });
 
 router.get('/product',(req, res) => {
