@@ -12,7 +12,9 @@ const ProductSchema = mongoose.Schema(
             type: String
         },
         type: {
-            
+            type: String,
+            enum: ["isAdmin" ,  "user"] , 
+            default: "user"
         }
     }
 );
