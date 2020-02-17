@@ -6,7 +6,7 @@ const UserService = require('../service/UserService');
 const UserInstance = new UserController(new UserService);
 
 
-router.get('/user', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.send('esto es una prueba');
 });
 

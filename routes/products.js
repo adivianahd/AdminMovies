@@ -2,16 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 const ProductController = require('../controllers/ProductController');
-const ProductService = require('../service/ProductService');
-const productInstance = new ProductController(new ProductService);
+//const ProductService = require('../service/ProductService');
+const ProductService = require("../service/CrudService");
+const ProductModel = require("../model/ProductModel");
+const productInstance = new ProductController(new ProductService(ProductModel));
 
-
-router.post('/products',(req, res, next) => {
+router.post('/',(req, res, next) => {
   productInstance.addNewProduct(req, res);
 });
 
-router.get('/product',(req, res) => {
-  productInstance.getProduct(req, res);
+router.get('/',(req, res) => {
+  productInstance.getProducts(req, res);
 });
 
 module.exports = router;
