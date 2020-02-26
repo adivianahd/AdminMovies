@@ -5,7 +5,7 @@ const ProductController = require('../controllers/ProductController');
 const ProductService = require('../service/ProductService');
 const productInstance = new ProductController(new ProductService());
 
-router.post('/',(req, res, next) => {
+router.post('/',(req, res) => {
   productInstance.addProduct(req, res);
 });
 

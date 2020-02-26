@@ -1,7 +1,7 @@
 class CrudService {
   constructor(model) {
     this.model = model;
-    this.limit = 3;
+    this.limit = 15;
   };
 
   get(page) {
