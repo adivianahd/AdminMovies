@@ -6,8 +6,21 @@ var logger = require('morgan');
 
 var productsRouter = require('./routes/products');
 var usersRouter = require('./routes/users');
-
 var app = express();
+var passport = require("./Middleware")
+
+function passportIsAdmin(req, res, next) {
+  if (req.originalUrl == "/products/login") {
+    return next();
+  }
+
+  if (req.method == "POST" && (!req.user || !req.user.isAdmin)) {
+    return res.sendStatus(401);
+  }
+
+  return next();
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +31,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  require("express-session")({
+    secret: "s3ss10n_s3cr3t",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passportIsAdmin);
 
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);

@@ -32,8 +32,8 @@ class CrudService {
   
   };
 
- async delete(id) {
-    const model = await this.getById(id);
+  delete(id) {
+    const model = this.model.getById(id);
     if(!model) {
       return null;
     }
