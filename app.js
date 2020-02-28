@@ -63,4 +63,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+passport.serializeUser((user, cb) => cb(null, user));
+passport.deserializeUser((user, cb) => cb(null, user));
+
 module.exports = app;

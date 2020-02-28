@@ -45,12 +45,11 @@ class ProductController {
     return res.json(productById);
   }
 
-  async findByName(username) {
-    const user = await Products.find({ name: username }).limit(1).exec();
-    if (user.length) {
-      return user[0];
-    }
-    return null;
+  async findByName(req, res) {
+    const name = req.params.name
+    const productFind = await this.productService.findByName(name)
+
+    return res.json(productFind);
   }
 
   async updateProduct(req, res) {

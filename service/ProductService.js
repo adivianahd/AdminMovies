@@ -6,9 +6,6 @@ class ProductService extends CrudService {
     super(Product);
   }
 
-  findByName(username) {
-
-  }
-}
+};
 
 module.exports = ProductService;

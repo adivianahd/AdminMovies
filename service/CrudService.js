@@ -40,6 +40,11 @@ class CrudService {
 
     return model.deleteOne();
   };
+
+  findByUsername(name){
+    const query = this.model.findOne({name: name}).exec();
+    return query;
+  }
 }
 
 module.exports = CrudService;
