@@ -4,21 +4,28 @@ var router = express.Router();
 const ProductController = require('../controllers/ProductController');
 const ProductService = require('../service/ProductService');
 const productInstance = new ProductController(new ProductService());
-const passport = require("../Middleware");
- 
-router.post("/login", passport.authenticate("local"),(req, res) =>{
-  return res.json(req.product);
-});
 
-router.post('/',(req, res) => {
+function isAdmin(req, res, next) {
+  if (req.originalUrl == "/users/login") {
+    return next();
+  }
+
+  if (!req.user || !req.user.isAdmin) {
+    return res.sendStatus(401);
+  }
+
+  return next();
+}
+
+router.post('/', isAdmin, (req, res) => {
   productInstance.addProduct(req, res);
 });
 
-router.get('/',(req, res) => {
+router.get('/', isAdmin,(req, res) => {
   productInstance.getProduct(req, res);
 });
 
-router.get('/:id',(req, res) => {
+router.get('/:id', isAdmin, (req, res) => {
   productInstance.getById(req, res);
 });
 

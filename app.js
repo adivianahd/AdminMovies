@@ -9,17 +9,18 @@ var usersRouter = require('./routes/users');
 var app = express();
 var passport = require("./Middleware")
 
-function passportIsAdmin(req, res, next) {
-  if (req.originalUrl == "/products/login") {
+function isAdmin(req, res, next) {
+  if (req.originalUrl == "/users/login") {
     return next();
   }
 
-  if (req.method == "POST" && (!req.user || !req.user.isAdmin)) {
+  if (!req.user || !req.user.isAdmin) {
     return res.sendStatus(401);
   }
 
   return next();
 }
+
 
 
 // view engine setup
@@ -42,9 +43,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(passportIsAdmin);
+app.use(isAdmin);
 
-app.use('/products', productsRouter);
+app.use('/movies', productsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -62,8 +63,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-passport.serializeUser((user, cb) => cb(null, user));
-passport.deserializeUser((user, cb) => cb(null, user));
 
 module.exports = app;

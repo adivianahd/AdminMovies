@@ -1,15 +1,6 @@
-const bcrypt = require("bcrypt-nodejs");
-
 class ProductController {
   constructor(productService) {
     this.productService = productService;
-  }
-
-  async login(req, res) {
-    const product = await this.ProductService.getById(req.body.id);
-    const compare = bcrypt.compareSync(req.body.password, user.password);
-
-    return res.send(compare);
   }
 
   async getProduct(req, res) {
@@ -21,18 +12,10 @@ class ProductController {
 
   async addProduct(req, res) {
     const body = req.body;
+    const newProduct = thi.productService.add(body);
 
-    const newBody = {
-      ...body,
-      password: bcrypt.hashSync(body.password)
-    };
+    return res.json({productAdd: newProduct  })
 
-    if (body) {
-      await this.ProductService.addProduct(newBody);
-      return res.sendStatus(200);
-    } else {
-      return res.sendStatus(400);
-    }
   }
 
   async getById(req, res) {
@@ -43,13 +26,6 @@ class ProductController {
     }
     
     return res.json(productById);
-  }
-
-  async findByName(req, res) {
-    const name = req.params.name
-    const productFind = await this.productService.findByName(name)
-
-    return res.json(productFind);
   }
 
   async updateProduct(req, res) {

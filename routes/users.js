@@ -4,7 +4,17 @@ var router = express.Router();
 const UserController = require('../controllers/UserController');
 const UserService = require('../service/UserService');
 const UserInstance = new UserController(new UserService);
+const bcrypt = require("bcrypt-nodejs");
+const passport = require("../Middleware");
 
+ 
+router.post("/login", passport.authenticate("local"),(req, res) =>{
+  return res.json(req.product);
+});
+
+router.get('/:name', (req, res) => {
+  UserInstance.findByUserName(req, res);
+});
 
 router.get('/', (req, res) => {
   UserInstance.getUser(req, res);

@@ -2,14 +2,6 @@ const mongoose = require('mongoose');
 
 const ProductSchema = mongoose.Schema(
     {
-        username: {
-            type: String,
-            require: true
-        },
-        password: {
-            type: String,
-            require: true
-        },
         name: {
             type: String
         },
