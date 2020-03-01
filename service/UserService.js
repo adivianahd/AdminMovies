@@ -6,6 +6,11 @@ class UserService  extends CrudService {
     super(User);
   }
 
+  async get(page) {
+    const users = await super.get(page);
+    return users.map(({ user, isAdmin }) =>  ({ user, isAdmin }));
+  }
+
   async findByUserName(name){
     const userFind = await User.findOne({user: name}).exec();
     return userFind; 
