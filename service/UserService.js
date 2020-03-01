@@ -7,9 +7,8 @@ class UserService  extends CrudService {
   }
 
   async findByUserName(name){
-    const user = await User.find({name: true}).exec();
-    console.log(user)
-    return user; 
+    const userFind = await User.findOne({user: name}).exec();
+    return userFind; 
   };
 
 
