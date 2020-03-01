@@ -19,7 +19,7 @@ class UserController {
       };
   
       if (body) {
-        await this.UserService.add(newBody);
+        await this.userService.add(newBody);
         return res.sendStatus(200);
       } else {
         return res.sendStatus(400);
@@ -28,11 +28,12 @@ class UserController {
 
     async findByUserName(req, res) {
       const name = req.params.name;
-      const userFound = await this.UserService.findByUserName(name)
+      const userFound = await this.userService.findByUserName(name)
       
       if(!userFound){
-        return null
+        return res.sendStatus(404);
       }
+      return res.json(userFound);
     };
       
     async login(req, res) {

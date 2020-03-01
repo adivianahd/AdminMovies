@@ -11,7 +11,7 @@ router.post("/login", passport.authenticate("local"),(_, res) => {
   return res.json("Acceso Permitido");
 });
 
-router.get('/:name', (req, res) => {
+router.get('/name/:name', (req, res) => {
   UserInstance.findByUserName(req, res);
 });
 
