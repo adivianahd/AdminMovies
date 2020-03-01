@@ -9,20 +9,6 @@ var usersRouter = require('./routes/users');
 var app = express();
 var passport = require("./Middleware")
 
-function isAdmin(req, res, next) {
-  if (req.originalUrl == "/users/login") {
-    return next();
-  }
-
-  if (!req.user || !req.user.isAdmin) {
-    return res.sendStatus(401);
-  }
-
-  return next();
-}
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -42,8 +28,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(isAdmin);
 
 app.use('/movies', productsRouter);
 app.use('/users', usersRouter);

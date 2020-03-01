@@ -12,7 +12,7 @@ class ProductController {
 
   async addProduct(req, res) {
     const body = req.body;
-    const newProduct = thi.productService.add(body);
+    const newProduct = this.productService.add(body);
 
     return res.json({productAdd: newProduct  })
 

@@ -11,15 +11,15 @@ async function strategy(username, password, cb) {
   if (user && user.password) {
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
     if (isPasswordCorrect) {
-      console.log('%c⧭', 'color: #ffa640', "auth success");
+      console.log("[Middleware]", "auth success");
       return cb(null, user);
     }
 
-    console.log('%c⧭', 'color: #ffa640', "password wrong");
+    console.log("[Middleware]", "password wrong");
     return cb("La contraseña es incorrecta");
   }
 
-  console.log('%c⧭', 'color: #ffa640', "user not found");
+  console.log("[Middleware]", "user not found");
   return cb("Usuario no existe");
 }
 
