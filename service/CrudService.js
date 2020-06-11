@@ -32,13 +32,12 @@ class CrudService {
   
   };
 
-  delete(id) {
-    const model = this.model.getById(id);
+  deleteOne(id) {
+    const model = this.model.findOne({_id: id}).exec()
     if(!model) {
       return null;
     }
-
-    return model.deleteOne();
+    return model.deleteOne({_id: id});
   };
 
   findByUsername(name){

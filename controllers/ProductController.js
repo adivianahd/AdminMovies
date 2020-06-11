@@ -19,7 +19,8 @@ class ProductController {
   }
 
   async getById(req, res) {
-    const productById = await this.productService.getById(req.params.id);
+    const id = req.params.id
+    const productById = await this.productService.getById(id);
 
     if(!productById) {
       return res.sendStatus(404);
@@ -35,7 +36,8 @@ class ProductController {
   }
   
   async deleteProduct(req, res) {
-    const updateProduct = await this.productService.delete(req.params.id);
+    const id = req.params.id
+    const updateProduct = await this.productService.delete(id);
     if(!updateProduct) {
       return res.sendStatus(404);
     }

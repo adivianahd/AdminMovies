@@ -13,7 +13,7 @@ class UserService  extends CrudService {
 
   async findByUserName(name){
     const userFind = await User.findOne({user: name}).exec();
-    return this.userFilter(userFind); 
+    return userFind; 
   };
 
   userFilter({_id, user, isAdmin }) {

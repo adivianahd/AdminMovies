@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const multer = require("multer");
+const upload = multer({dest: "uploads/"});
 const UserController = require('../controllers/UserController');
 const UserService = require('../service/UserService');
 const UserInstance = new UserController(new UserService);
@@ -23,7 +25,7 @@ router.get('/:id', (req, res) => {
   UserInstance.getById(req, res);
 });
 
-router.post('/', (req, res) => {
+router.post('/', upload.single("avatar"), (req, res) => {
   UserInstance.addUser(req, res);
 });
 
